@@ -115,6 +115,70 @@ public class Gui extends JFrame implements ActionListener {
     }
   }
 
+  public JButton getCorrespondingButton(int r, int c) {
+    int row = 0;
+    JButton button = btn1;
+    switch (r) {
+      case 0:
+        row = 0;
+        break;
+      case 1:
+        row = 1;
+        break;
+      case 2:
+        row = 2;
+        break;
+    }
+
+    switch (c) {
+      case 0:
+        if (row == 0) {
+          button = btn1;
+        } else if (row == 1) {
+          button = btn2;
+        } else if (row == 2) {
+          button = btn3;
+        }
+        break;
+      case 1:
+        if (row == 0) {
+          button = btn4;
+        } else if (row == 1) {
+          button = btn5;
+        } else if (row == 2) {
+          button = btn6;
+        }
+        break;
+      case 2:
+        if (row == 0) {
+          button = btn7;
+        } else if (row == 1) {
+          button = btn8;
+        } else if (row == 2) {
+          button = btn9;
+        }
+        break;
+    }
+    return button;
+  }
+
+  public void aiMakeMove() {
+    boolean shouldBreak = false;
+
+    for (int r = 0; r < board.length; r++) {
+      for (int c = 0; c < board[r].length; c++) {
+        if (board[r][c].equals("Empty")) {
+          board[r][c].equals(PLAYER_2);
+          getCorrespondingButton(r, c).setIcon(new ImageIcon(getClass().getClassLoader().getResource("o.png")));
+          shouldBreak = true;
+          break;
+        }
+        if (shouldBreak) break;
+      }
+    }
+    turn = PLAYER_1;
+  }
+
   public void resetGame() {
     btn1.setIcon(null);
     btn2.setIcon(null);
@@ -270,6 +334,8 @@ public class Gui extends JFrame implements ActionListener {
             break;
         }
       }
+
+      if (source != resetBtn) aiMakeMove();
 
       for (int r = 0; r < board.length; r++) {
         for (int c = 0; c < board[r].length; c++) {
