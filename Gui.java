@@ -23,7 +23,7 @@ public class Gui extends JFrame implements ActionListener {
 
   public Gui() {
     super("Tic Tac Toe");
-    setSize(400, 300);
+    setSize(531, 616);
 
     initBoard(); // initializing the board
 
@@ -116,15 +116,15 @@ public class Gui extends JFrame implements ActionListener {
   }
 
   public void resetGame() {
-    btn1.setBackground(defaultBtnColor);
-    btn2.setBackground(defaultBtnColor);
-    btn3.setBackground(defaultBtnColor);
-    btn4.setBackground(defaultBtnColor);
-    btn5.setBackground(defaultBtnColor);
-    btn6.setBackground(defaultBtnColor);
-    btn7.setBackground(defaultBtnColor);
-    btn8.setBackground(defaultBtnColor);
-    btn9.setBackground(defaultBtnColor);
+    btn1.setIcon(null);
+    btn2.setIcon(null);
+    btn3.setIcon(null);
+    btn4.setIcon(null);
+    btn5.setIcon(null);
+    btn6.setIcon(null);
+    btn7.setIcon(null);
+    btn8.setIcon(null);
+    btn9.setIcon(null);
 
     btn1Pressed = false;
     btn2Pressed = false;
@@ -157,11 +157,11 @@ public class Gui extends JFrame implements ActionListener {
         putValueInBoard(btn1, turn);
         switch(turn) {
           case PLAYER_1:
-            btn1.setBackground(Color.BLUE);
+            btn1.setIcon(new ImageIcon(getClass().getClassLoader().getResource("x.png")));
             turn = PLAYER_2;
             break;
           case PLAYER_2:
-            btn1.setBackground(Color.RED);
+            btn1.setIcon(new ImageIcon(getClass().getClassLoader().getResource("o.png")));
             turn = PLAYER_1;
             break;
         }
@@ -170,11 +170,11 @@ public class Gui extends JFrame implements ActionListener {
         putValueInBoard(btn2, turn);
         switch(turn) {
           case PLAYER_1:
-            btn2.setBackground(Color.BLUE);
+            btn2.setIcon(new ImageIcon(getClass().getClassLoader().getResource("x.png")));
             turn = PLAYER_2;
             break;
           case PLAYER_2:
-            btn2.setBackground(Color.RED);
+            btn2.setIcon(new ImageIcon(getClass().getClassLoader().getResource("o.png")));
             turn = PLAYER_1;
             break;
         }
@@ -183,11 +183,11 @@ public class Gui extends JFrame implements ActionListener {
         putValueInBoard(btn3, turn);
         switch(turn) {
           case PLAYER_1:
-            btn3.setBackground(Color.BLUE);
+            btn3.setIcon(new ImageIcon(getClass().getClassLoader().getResource("x.png")));
             turn = PLAYER_2;
             break;
           case PLAYER_2:
-            btn3.setBackground(Color.RED);
+            btn3.setIcon(new ImageIcon(getClass().getClassLoader().getResource("o.png")));
             turn = PLAYER_1;
             break;
         }
@@ -196,11 +196,11 @@ public class Gui extends JFrame implements ActionListener {
         putValueInBoard(btn4, turn);
         switch(turn) {
           case PLAYER_1:
-            btn4.setBackground(Color.BLUE);
+            btn4.setIcon(new ImageIcon(getClass().getClassLoader().getResource("x.png")));
             turn = PLAYER_2;
             break;
           case PLAYER_2:
-            btn4.setBackground(Color.RED);
+            btn4.setIcon(new ImageIcon(getClass().getClassLoader().getResource("o.png")));
             turn = PLAYER_1;
             break;
         }
@@ -209,11 +209,11 @@ public class Gui extends JFrame implements ActionListener {
         putValueInBoard(btn5, turn);
         switch(turn) {
           case PLAYER_1:
-            btn5.setBackground(Color.BLUE);
+            btn5.setIcon(new ImageIcon(getClass().getClassLoader().getResource("x.png")));
             turn = PLAYER_2;
             break;
           case PLAYER_2:
-            btn5.setBackground(Color.RED);
+            btn5.setIcon(new ImageIcon(getClass().getClassLoader().getResource("o.png")));
             turn = PLAYER_1;
             break;
         }
@@ -222,11 +222,11 @@ public class Gui extends JFrame implements ActionListener {
         putValueInBoard(btn6, turn);
         switch(turn) {
           case PLAYER_1:
-            btn6.setBackground(Color.BLUE);
+            btn6.setIcon(new ImageIcon(getClass().getClassLoader().getResource("x.png")));
             turn = PLAYER_2;
             break;
           case PLAYER_2:
-            btn6.setBackground(Color.RED);
+            btn6.setIcon(new ImageIcon(getClass().getClassLoader().getResource("o.png")));
             turn = PLAYER_1;
             break;
         }
@@ -235,11 +235,11 @@ public class Gui extends JFrame implements ActionListener {
         putValueInBoard(btn7, turn);
         switch(turn) {
           case PLAYER_1:
-            btn7.setBackground(Color.BLUE);
+            btn7.setIcon(new ImageIcon(getClass().getClassLoader().getResource("x.png")));
             turn = PLAYER_2;
             break;
           case PLAYER_2:
-            btn7.setBackground(Color.RED);
+            btn7.setIcon(new ImageIcon(getClass().getClassLoader().getResource("o.png")));
             turn = PLAYER_1;
             break;
         }
@@ -248,11 +248,11 @@ public class Gui extends JFrame implements ActionListener {
         putValueInBoard(btn8, turn);
         switch(turn) {
           case PLAYER_1:
-            btn8.setBackground(Color.BLUE);
+            btn8.setIcon(new ImageIcon(getClass().getClassLoader().getResource("x.png")));
             turn = PLAYER_2;
             break;
           case PLAYER_2:
-            btn8.setBackground(Color.RED);
+            btn8.setIcon(new ImageIcon(getClass().getClassLoader().getResource("o.png")));
             turn = PLAYER_1;
             break;
         }
@@ -261,11 +261,11 @@ public class Gui extends JFrame implements ActionListener {
         putValueInBoard(btn9, turn);
         switch(turn) {
           case PLAYER_1:
-            btn9.setBackground(Color.BLUE);
+            btn9.setIcon(new ImageIcon(getClass().getClassLoader().getResource("x.png")));
             turn = PLAYER_2;
             break;
           case PLAYER_2:
-            btn9.setBackground(Color.RED);
+            btn9.setIcon(new ImageIcon(getClass().getClassLoader().getResource("o.png")));
             turn = PLAYER_1;
             break;
         }
@@ -285,6 +285,7 @@ public class Gui extends JFrame implements ActionListener {
         resultsText.setText(winner + " wins!");
       }
     }
+    System.out.println(getWidth() + " " + getHeight());
   }
 
   public boolean isCellEmpty(int r, int c) {
