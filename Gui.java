@@ -50,7 +50,7 @@ public class Gui extends JFrame implements ActionListener {
     winnerLabel.setText("It's player " + currentPlayer + "'s turn!");
     winnerLabel.setHorizontalAlignment(JLabel.CENTER);
     winnerLabel.setFont(new Font(winnerLabel.getFont().getName(), Font.PLAIN, 25));
-    contentPane.add(winnerLabel, BorderLayout.SOUTH);
+    bottomArea.add(winnerLabel, BorderLayout.SOUTH);
 
     JPanel buttonGrid = new JPanel();
     buttonGrid.setLayout(new GridLayout(3, 3));
