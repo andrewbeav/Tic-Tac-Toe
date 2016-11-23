@@ -7,7 +7,7 @@ public class Gui extends JFrame implements ActionListener {
 
   ArrayList<JButton> gridButtons = new ArrayList<>(9);
   JButton resetButton;
-  JLabel winnerLabel;
+  JLabel winnerLabel, player1ScoreLabel, player2ScoreLabel;
 
   Color originalColor;
 
@@ -45,10 +45,16 @@ public class Gui extends JFrame implements ActionListener {
     topArea.setBackground(new Color(83, 85, 89));
     bottomArea.setBackground(new Color(83, 85, 89));
 
+    player1ScoreLabel = new JLabel("Player 1: 0");
+    topArea.add(player1ScoreLabel);
+
     resetButton = new JButton("Reset Game");
     topArea.add(resetButton);
     resetButton.setBackground(new Color(100, 110, 127));
     resetButton.addActionListener(this);
+
+    player2ScoreLabel = new JLabel("Player 2: 0");
+    topArea.add(player2ScoreLabel);
 
     originalColor = resetButton.getBackground();
 
@@ -112,6 +118,10 @@ public class Gui extends JFrame implements ActionListener {
 
       if (gameBoard.checkForWin()) {
         winnerLabel.setText("Player " + gameBoard.getWinner() + " won the Game!");
+
+        player1ScoreLabel.setText("Player 1: " + gameBoard.getPlayer1Score());
+        player2ScoreLabel.setText("Player 2: " + gameBoard.getPlayer2Score());
+
         isGamePlaying = false;
       } else winnerLabel.setText("It's player " + currentPlayer + "'s turn!");
     }
