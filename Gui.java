@@ -29,6 +29,8 @@ public class Gui extends JFrame implements ActionListener {
     super("Tic Tac Toe");
     setSize(531, 616);
 
+    setIconImage(xIcon.getImage());
+
     Container contentPane = this.getContentPane();
     contentPane.setLayout(new BorderLayout());
 
