@@ -11,6 +11,9 @@ public class Gui extends JFrame implements ActionListener {
 
   Color originalColor;
 
+  final ImageIcon xIcon = new ImageIcon(getClass().getClassLoader().getResource("x.png"));
+  final ImageIcon oIcon = new ImageIcon(getClass().getClassLoader().getResource("o.png"));
+
   Board gameBoard = new Board();
   int currentPlayer = 1;
   int initialPlayer = 1;
@@ -58,7 +61,8 @@ public class Gui extends JFrame implements ActionListener {
 
   public void resetGui() {
     for (JButton button : gridButtons) {
-      button.setBackground(originalColor);
+      //button.setBackground(originalColor);
+      button.setIcon(null);
     }
 
     isGamePlaying = true;
@@ -84,11 +88,13 @@ public class Gui extends JFrame implements ActionListener {
     }
     else if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
       if (currentPlayer == 1) {
-        button.setBackground(Color.RED);
+        button.setIcon(xIcon);
+        //button.setBackground(Color.RED);
         gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer);
         currentPlayer = 2;
       } else if (currentPlayer == 2) {
-        button.setBackground(Color.BLUE);
+        button.setIcon(oIcon);
+        //button.setBackground(Color.BLUE);
         gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer);
         currentPlayer = 1;
       }
