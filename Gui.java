@@ -32,6 +32,10 @@ public class Gui extends JFrame implements ActionListener {
     Container contentPane = this.getContentPane();
     contentPane.setLayout(new BorderLayout());
 
+    JPanel bottomArea = new JPanel();
+    bottomArea.setLayout(new FlowLayout());
+    contentPane.add(bottomArea, BorderLayout.SOUTH);
+
     JPanel topArea = new JPanel();
     topArea.setLayout(new FlowLayout());
     contentPane.add(topArea, BorderLayout.NORTH);
