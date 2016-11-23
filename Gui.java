@@ -40,8 +40,12 @@ public class Gui extends JFrame implements ActionListener {
     topArea.setLayout(new FlowLayout());
     contentPane.add(topArea, BorderLayout.NORTH);
 
+    topArea.setBackground(new Color(83, 85, 89));
+    bottomArea.setBackground(new Color(83, 85, 89));
+
     resetButton = new JButton("Reset Game");
     topArea.add(resetButton);
+    resetButton.setBackground(new Color(100, 110, 127));
     resetButton.addActionListener(this);
 
     originalColor = resetButton.getBackground();
@@ -59,6 +63,7 @@ public class Gui extends JFrame implements ActionListener {
     makeButtonGrid();
     for (JButton button : gridButtons) {
       buttonGrid.add(button);
+      button.setBackground(new Color(100, 110, 127));
       button.addActionListener(this);
     }
   }
