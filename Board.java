@@ -5,6 +5,9 @@ public class Board {
   private int[][] board;
   private int winner;
 
+  private int player1Score = 0;
+  private int player2Score = 0;
+
   boolean toPrintOnCommandLine = false;
 
   private void initBoard() {
@@ -14,6 +17,14 @@ public class Board {
         board[r][c] = 0;
       }
     }
+  }
+
+  public int getPlayer1Score() {
+    return player1Score;
+  }
+
+  public int getPlayer2Score() {
+    return player2Score;
   }
 
   public Board() {
@@ -38,6 +49,17 @@ public class Board {
     else return true;
   }
 
+  public void updateScoreForPlayer(int player) {
+    switch (player) {
+      case 1:
+        player1Score++;
+        break;
+      case 2:
+        player2Score++;
+        break;
+    }
+  }
+
   public boolean checkForWin() {
 
     // Checking horizontal matches
@@ -49,6 +71,7 @@ public class Board {
             break;
           } else if (c == 2) {
             winner = valueToCheck;
+            updateScoreForPlayer(winner);
             return true;
           }
         }
@@ -63,6 +86,7 @@ public class Board {
           if (board[r][c] != valueToCheck) break;
           else if (r == 2) {
             winner = valueToCheck;
+            updateScoreForPlayer(winner);
             return true;
           }
         }
@@ -75,6 +99,7 @@ public class Board {
         if (board[i][i] != board[0][0]) break;
         else if (i == 2) {
           winner = board[0][0];
+          updateScoreForPlayer(winner);
           return true;
         }
       }
@@ -87,6 +112,7 @@ public class Board {
         if (board[r][c] != board[0][2]) break;
         else if (r == 2) {
           winner = board[0][2];
+          updateScoreForPlayer(winner);
           return true;
         }
       }
