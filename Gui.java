@@ -117,7 +117,7 @@ public class Gui extends JFrame implements ActionListener {
       }
 
       if (gameBoard.checkForWin()) {
-        winnerLabel.setText("Player " + gameBoard.getWinner() + " won the Game!");
+        winnerLabel.setText("Player " + gameBoard.getWinner() + " Won the Round!");
 
         player1ScoreLabel.setText("Player 1: " + gameBoard.getPlayer1Score());
         player2ScoreLabel.setText("Player 2: " + gameBoard.getPlayer2Score());
