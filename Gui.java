@@ -5,84 +5,80 @@ import java.util.*;
 
 public class Gui extends JFrame implements ActionListener {
 
-  ArrayList<JButton> gridButtons = new ArrayList<>(9);
-  JButton resetButton;
-  JLabel winnerLabel, player1ScoreLabel, player2ScoreLabel;
+  ArrayList<JButton> gridButtons = new ArrayList<>(9); // List of buttons
+  JButton resetButton; // button to reset game
+  JLabel winnerLabel, player1ScoreLabel, player2ScoreLabel; // Labels
 
-  Color originalColor;
 
+  // x and o images
   final ImageIcon xIcon = new ImageIcon(getClass().getClassLoader().getResource("x.png"));
   final ImageIcon oIcon = new ImageIcon(getClass().getClassLoader().getResource("o.png"));
 
-  Board gameBoard = new Board();
-  int currentPlayer = 1;
-  int initialPlayer = 1;
-  boolean isGamePlaying = true;
+  Board gameBoard = new Board(); // Creating new board object
+  int currentPlayer = 1; // setting current player
+  int initialPlayer = 1; // setting the initialPlayer (beginning of game)
+  boolean isGamePlaying = true; // setting boolean to see if the game is playing
 
-  public void makeButtonGrid() {
+  public void makeButtonGrid() { // Creating buttons and adding them to the list
     for (int i = 0; i < 9; i++) {
       gridButtons.add(new JButton());
     }
   }
 
-  public Gui() {
-    super("Tic Tac Toe");
-    setSize(531, 616);
+  public Gui() { // Constructor
+    super("Tic Tac Toe"); // Setting title
+    setSize(531, 616); // Setting size
 
-    setIconImage(xIcon.getImage());
+    setIconImage(xIcon.getImage()); // setting icon for entire program
 
-    Container contentPane = this.getContentPane();
-    contentPane.setLayout(new BorderLayout());
+    Container contentPane = this.getContentPane(); // making content pane for the entire frame
+    contentPane.setLayout(new BorderLayout()); // setting it to border layout
 
-    JPanel bottomArea = new JPanel();
-    bottomArea.setLayout(new FlowLayout());
-    contentPane.add(bottomArea, BorderLayout.SOUTH);
+    JPanel bottomArea = new JPanel(); // making the panel for the bottom
+    bottomArea.setLayout(new FlowLayout()); // setting it to flow layout
+    contentPane.add(bottomArea, BorderLayout.SOUTH); // adding the bottomArea to the bottom
 
-    JPanel topArea = new JPanel();
-    topArea.setLayout(new FlowLayout());
-    contentPane.add(topArea, BorderLayout.NORTH);
+    JPanel topArea = new JPanel(); // making panel for the top
+    topArea.setLayout(new FlowLayout()); // setting it to flow layout
+    contentPane.add(topArea, BorderLayout.NORTH); // adding the topArea to the top
 
-    topArea.setBackground(new Color(83, 85, 89));
-    bottomArea.setBackground(new Color(83, 85, 89));
+    topArea.setBackground(new Color(83, 85, 89)); // setting the color of the background
+    bottomArea.setBackground(new Color(83, 85, 89)); // Same thing as above
 
-    player1ScoreLabel = new JLabel("Player 1: 0");
-    topArea.add(player1ScoreLabel);
+    player1ScoreLabel = new JLabel("Player 1: 0"); // creating the label for scores
+    topArea.add(player1ScoreLabel); // adding it to the topArea
 
-    resetButton = new JButton("Reset Game");
-    topArea.add(resetButton);
-    resetButton.setBackground(new Color(100, 110, 127));
-    resetButton.addActionListener(this);
+    resetButton = new JButton("Reset Game"); // creating the resetButton
+    topArea.add(resetButton); // adding it to the topArea
+    resetButton.setBackground(new Color(100, 110, 127)); // setting the background of the reset button
+    resetButton.addActionListener(this); // adding the event handler
 
-    player2ScoreLabel = new JLabel("Player 2: 0");
-    topArea.add(player2ScoreLabel);
+    player2ScoreLabel = new JLabel("Player 2: 0"); // making label for scores
+    topArea.add(player2ScoreLabel); // adding it to the topArea
 
-    originalColor = resetButton.getBackground();
+    winnerLabel = new JLabel(); // making new label for the winner
+    winnerLabel.setText("It's player " + currentPlayer + "'s turn!"); // setting the text
+    winnerLabel.setFont(new Font(winnerLabel.getFont().getName(), Font.PLAIN, 25)); // making it bigger font
+    bottomArea.add(winnerLabel);// adding it to the bottomArea
 
-    winnerLabel = new JLabel();
-    winnerLabel.setText("It's player " + currentPlayer + "'s turn!");
-    winnerLabel.setHorizontalAlignment(JLabel.CENTER);
-    winnerLabel.setFont(new Font(winnerLabel.getFont().getName(), Font.PLAIN, 25));
-    bottomArea.add(winnerLabel, BorderLayout.SOUTH);
+    JPanel buttonGrid = new JPanel(); // making new panel for holding the grid of buttons
+    buttonGrid.setLayout(new GridLayout(3, 3)); // making a grid layout for the buttons
+    contentPane.add(buttonGrid, BorderLayout.CENTER); // adding it to the content pane in the center
 
-    JPanel buttonGrid = new JPanel();
-    buttonGrid.setLayout(new GridLayout(3, 3));
-    contentPane.add(buttonGrid, BorderLayout.CENTER);
-
-    makeButtonGrid();
-    for (JButton button : gridButtons) {
-      buttonGrid.add(button);
-      button.setBackground(new Color(100, 110, 127));
-      button.addActionListener(this);
+    makeButtonGrid(); // making the grid of buttons
+    for (JButton button : gridButtons) { // looping through the list of buttons
+      buttonGrid.add(button); // adding the button to the grid of buttons
+      button.setBackground(new Color(100, 110, 127)); // setting the background
+      button.addActionListener(this); // adding the event handler
     }
   }
 
-  public void resetGui() {
-    for (JButton button : gridButtons) {
-      //button.setBackground(originalColor);
-      button.setIcon(null);
+  public void resetGui() { // method to reset the gui
+    for (JButton button : gridButtons) { // looping through the button
+      button.setIcon(null);// setting the icon to null
     }
 
-    isGamePlaying = true;
+    isGamePlaying = true; // start playing the game
     if (initialPlayer == 2) {
       initialPlayer = 1;
       currentPlayer = initialPlayer;
@@ -92,45 +88,50 @@ public class Gui extends JFrame implements ActionListener {
       currentPlayer = initialPlayer;
     }
 
-    winnerLabel.setText("It's player " + currentPlayer + "'s turn!");
+    winnerLabel.setText("It's player " + currentPlayer + "'s turn!"); // resetting the text of the winnerLabel
   }
 
   public void actionPerformed(ActionEvent event) {
-    Object source = event.getSource();
-    JButton button = (JButton) source;
+    Object source = event.getSource(); // getting the source
+    JButton button = (JButton) source; // casting it to a game button
 
     if (source == resetButton) {
+      // reset everything
       resetGui();
       gameBoard.reset();
     }
     else if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
       if (currentPlayer == 1) {
-        button.setIcon(xIcon);
-        //button.setBackground(Color.RED);
-        gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer);
-        currentPlayer = 2;
+        button.setIcon(xIcon); // setting the image to 'x'
+        gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer); // assigning the owner
+        currentPlayer = 2; // swapping the player
       } else if (currentPlayer == 2) {
-        button.setIcon(oIcon);
-        //button.setBackground(Color.BLUE);
-        gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer);
-        currentPlayer = 1;
+        button.setIcon(oIcon); // setting the image to 'o'
+        gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer); // assigning the owner
+        currentPlayer = 1; // swapping the player
       }
 
-      if (gameBoard.checkForWin()) {
-        winnerLabel.setText("Player " + gameBoard.getWinner() + " Won the Round!");
+      if (gameBoard.checkForWin()) { // Checking if there is a winner
+        winnerLabel.setText("Player " + gameBoard.getWinner() + " Won the Round!"); // setting the text
 
-        player1ScoreLabel.setText("Player 1: " + gameBoard.getPlayer1Score());
-        player2ScoreLabel.setText("Player 2: " + gameBoard.getPlayer2Score());
+        player1ScoreLabel.setText("Player 1: " + gameBoard.getPlayer1Score()); // setting the text for the score
+        player2ScoreLabel.setText("Player 2: " + gameBoard.getPlayer2Score()); // setting the text for the score
 
-        isGamePlaying = false;
-      } else winnerLabel.setText("It's player " + currentPlayer + "'s turn!");
+        isGamePlaying = false; // Make the game not playable
+      } else winnerLabel.setText("It's player " + currentPlayer + "'s turn!"); // setting the text for the current players turn
     }
   }
 
-  public int findRowOfButton(JButton button) {
-    int row = 0;
-    int btnNum = findIndexOfButton(button);
 
+  //
+  // These are 'helper' methods. Used for things above.
+  //
+
+  public int findRowOfButton(JButton button) { // This method finds the row for the button
+    int row = 0; // initializing the row to 0
+    int btnNum = findIndexOfButton(button); // getting the index of the button
+
+    // Checking each case to see what row it's in
     if (btnNum < 3) {
       row = 0;
     } else if (btnNum < 6) {
@@ -139,13 +140,14 @@ public class Gui extends JFrame implements ActionListener {
       row = 2;
     }
 
-    return row;
+    return row; // returning that row
   }
 
-  public int findColumnOfButton(JButton button) {
-    int column = 0;
-    int btnNum = findIndexOfButton(button);
+  public int findColumnOfButton(JButton button) { // This method finds the column of a button
+    int column = 0; // initializing the column to 0
+    int btnNum = findIndexOfButton(button); // finding the index of the button
 
+    // Checking each case to see what column it is in.
     if (btnNum % 3 == 0) {
       column = 0;
     } else if (btnNum % 3 == 1) {
@@ -154,12 +156,13 @@ public class Gui extends JFrame implements ActionListener {
       column = 2;
     }
 
-    return column;
+    return column; // returning the column
   }
 
-  public int findIndexOfButton(JButton button) {
-    int btnNum = 0;
+  public int findIndexOfButton(JButton button) { // finding the index of a specified button in the list
+    int btnNum = 0; // initializing the index variable
 
+    // linear search through the list
     for (int i = 0; i < gridButtons.size(); i++) {
        if (gridButtons.get(i) == button) {
           btnNum = i;
@@ -167,9 +170,10 @@ public class Gui extends JFrame implements ActionListener {
        }
     }
 
-    return btnNum;
+    return btnNum; // return the index
   }
 
+  // method to show the grid on the command line
   public void visualizeBoardOnCommandLine() {
     gameBoard.visualizeBoardOnCommandLine();
   }

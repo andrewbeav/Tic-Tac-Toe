@@ -2,11 +2,11 @@ import javax.swing.JFrame;
 
 public class Main {
   public static void main(String[] args) {
-    Gui gui = new Gui();
-    gui.setVisible(true);
-    gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    Gui gui = new Gui(); // creating new Gui object
+    gui.setVisible(true); // making it visible
+    gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // setting default close operation
 
-    if (args.length > 0 && args[0].equals("-clv")) {
+    if (args.length > 0 && args[0].equals("-clv")) { // clv = 'command line visualization'
       gui.visualizeBoardOnCommandLine();
     }
   }

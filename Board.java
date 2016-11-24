@@ -1,16 +1,17 @@
 import java.util.*;
 
 public class Board {
-  final int BOARD_SIZE = 3;
-  private int[][] board;
-  private int winner;
+  final int BOARD_SIZE = 3; // Size of the board, probably shouldn't change this
+  private int[][] board; // actual board
+  private int winner; // The winner variable
 
+  // initializing the scores
   private int player1Score = 0;
   private int player2Score = 0;
 
-  boolean toPrintOnCommandLine = false;
+  boolean toPrintOnCommandLine = false; // initializing boolean variable to print grid on command line
 
-  private void initBoard() {
+  private void initBoard() { // This method initializes the board and sets all values to 0
     board = new int[BOARD_SIZE][BOARD_SIZE];
     for (int r = 0; r < board.length; r++) {
       for (int c = 0; c < board[r].length; c++) {
@@ -19,37 +20,37 @@ public class Board {
     }
   }
 
-  public int getPlayer1Score() {
+  public int getPlayer1Score() { // Getter method for player 1 score
     return player1Score;
   }
 
-  public int getPlayer2Score() {
+  public int getPlayer2Score() { // Getter method for player 2 score
     return player2Score;
   }
 
-  public Board() {
+  public Board() { // Constructor
     initBoard();
   }
 
-  public void reset() {
+  public void reset() { // Reset method
     initBoard();
   }
 
-  public int getWinner() {
+  public int getWinner() { // Getter method for winner
     return winner;
   }
 
-  public void assignOwner(int r, int c, int player) {
+  public void assignOwner(int r, int c, int player) { // This method assigns a player to a cell
     board[r][c] = player;
     if (toPrintOnCommandLine) printBoard();
   }
 
-  public boolean checkIfOwned(int r, int c) {
+  public boolean checkIfOwned(int r, int c) { // This method checks if a cell is occupied
     if (board[r][c] == 0) return false;
     else return true;
   }
 
-  public void updateScoreForPlayer(int player) {
+  public void updateScoreForPlayer(int player) { // This method updates the score
     switch (player) {
       case 1:
         player1Score++;
@@ -60,7 +61,7 @@ public class Board {
     }
   }
 
-  public boolean checkForWin() {
+  public boolean checkForWin() { // This method checks if there is a winner
 
     // Checking horizontal matches
     for (int r = 0; r < board.length; r++) {
@@ -122,10 +123,10 @@ public class Board {
   }
 
   public void visualizeBoardOnCommandLine() {
-    toPrintOnCommandLine = true;
+    toPrintOnCommandLine = true; // set value to true if method is called
   }
 
-  public void printBoard() {
+  public void printBoard() { // This method prints the board on the command line
     for (int r = 0; r < board.length; r++) {
       for (int c = 0; c < board[r].length; c++) {
         System.out.printf("%5d", board[r][c]);
