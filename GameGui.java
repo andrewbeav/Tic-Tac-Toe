@@ -11,8 +11,7 @@ public class GameGui extends JFrame implements ActionListener {
 
 
   // x and o images
-  final ImageIcon xIcon = new ImageIcon(getClass().getClassLoader().getResource("x.png"));
-  final ImageIcon oIcon = new ImageIcon(getClass().getClassLoader().getResource("o.png"));
+  final ImageIcon player1Icon, player2Icon;
 
   final ImageIcon androidIcon = new ImageIcon(getClass().getClassLoader().getResource("android.png"));
   final ImageIcon appleIcon = new ImageIcon(getClass().getClassLoader().getResource("apple.png"));
@@ -28,9 +27,12 @@ public class GameGui extends JFrame implements ActionListener {
     }
   }
 
-  public GameGui() { // Constructor
+  public GameGui(ImageIcon player1Icon, ImageIcon player2Icon) { // Constructor
     super("Tic Tac Toe"); // Setting title
     setSize(531, 616); // Setting size
+
+    this.player1Icon = player1Icon;
+    this.player2Icon = player2Icon;
 
     setIconImage(androidIcon.getImage()); // setting icon for entire program
 
@@ -105,11 +107,11 @@ public class GameGui extends JFrame implements ActionListener {
     }
     else if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
       if (currentPlayer == 1) {
-        button.setIcon(androidIcon); // setting the image to 'x'
+        button.setIcon(player1Icon); // setting the image to 'x'
         gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer); // assigning the owner
         currentPlayer = 2; // swapping the player
       } else if (currentPlayer == 2) {
-        button.setIcon(appleIcon); // setting the image to 'o'
+        button.setIcon(player2Icon); // setting the image to 'o'
         gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer); // assigning the owner
         currentPlayer = 1; // swapping the player
       }
