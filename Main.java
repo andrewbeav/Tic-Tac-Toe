@@ -2,7 +2,7 @@ import javax.swing.JFrame;
 
 public class Main {
   public static void main(String[] args) {
-    Gui gui = new Gui(); // creating new Gui object
+    GameGui gui = new GameGui(); // creating new Gui object
     gui.setVisible(true); // making it visible
     gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // setting default close operation
 
