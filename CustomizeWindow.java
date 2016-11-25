@@ -1,4 +1,4 @@
-import javax.swing.*;
+/*import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -19,18 +19,33 @@ public class CustomizeWindow extends JFrame implements ActionListener {
     setSize(200, 200);
 
     Container contentPane = this.getContentPane();
-    contentPane.setLayout(new FlowLayout());
+    contentPane.setLayout(new BorderLayout());
     contentPane.setBackground(new Color(83, 85, 89));
 
+    JPanel topPanel = new JPanel();
+    topPanel.setLayout(new FlowLayout());
+    topPanel.setBackground(new Color(83, 85, 89));
+    contentPane.add(topPanel, BorderLayout.NORTH);
+
+    JPanel centerPanel = new JPanel();
+    centerPanel.setLayout(new GridLayout(2, 1));
+    centerPanel.setBackground(new Color(83, 85, 89));
+    contentPane.add(centerPanel, BorderLayout.CENTER);
+
+    JPanel bottomPanel = new JPanel();
+    bottomPanel.setLayout(new FlowLayout());
+    bottomPanel.setBackground(new Color(83, 85, 89));
+    contentPane.add(bottomPanel, BorderLayout.SOUTH);
+
     selectImageLabel = new JLabel("Select Images");
-    contentPane.add(selectImageLabel);
+    topPanel.add(selectImageLabel);
 
     androidVsAppleButton = new JRadioButton("Android vs. Apple", false);
     xoButton = new JRadioButton("X vs. O", false);
     androidVsAppleButton.setBackground(new Color(83, 85, 89));
     xoButton.setBackground(new Color(83, 85, 89));
-    contentPane.add(androidVsAppleButton);
-    contentPane.add(xoButton);
+    centerPanel.add(androidVsAppleButton);
+    centerPanel.add(xoButton);
     androidVsAppleButton.addActionListener(this);
     xoButton.addActionListener(this);
 
@@ -39,9 +54,9 @@ public class CustomizeWindow extends JFrame implements ActionListener {
     buttonGroup.add(xoButton);
 
     submitButton = new JButton("Start Playing Game");
-    contentPane.add(submitButton);
     submitButton.setBackground(new Color(100, 110, 127));
     submitButton.addActionListener(this);
+    bottomPanel.add(submitButton);
   }
 
   public void actionPerformed(ActionEvent event) {
@@ -61,4 +76,4 @@ public class CustomizeWindow extends JFrame implements ActionListener {
       this.setVisible(false);
     }
   }
-}
+}*/
