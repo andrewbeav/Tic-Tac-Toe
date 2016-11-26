@@ -9,13 +9,18 @@ public class GameGui extends JFrame implements ActionListener {
   JButton resetButton; // button to reset game
   JLabel winnerLabel, player1ScoreLabel, player2ScoreLabel; // Labels
 
+  JMenuBar menuBar;
+  JMenu settingsMenu, imagesMenu;
+  JMenuItem androidVsAppleMenuItem, xVsOMenuItem;
 
   // x and o images
-  final ImageIcon xIcon = new ImageIcon(getClass().getClassLoader().getResource("x.png"));
-  final ImageIcon oIcon = new ImageIcon(getClass().getClassLoader().getResource("o.png"));
+  ImageIcon player1Icon, player2Icon;
 
   final ImageIcon androidIcon = new ImageIcon(getClass().getClassLoader().getResource("android.png"));
   final ImageIcon appleIcon = new ImageIcon(getClass().getClassLoader().getResource("apple.png"));
+
+  final ImageIcon xIcon = new ImageIcon(getClass().getClassLoader().getResource("x.png"));
+  final ImageIcon oIcon = new ImageIcon(getClass().getClassLoader().getResource("o.png"));
 
   Board gameBoard = new Board(); // Creating new board object
   int currentPlayer = 1; // setting current player
@@ -32,7 +37,26 @@ public class GameGui extends JFrame implements ActionListener {
     super("Tic Tac Toe"); // Setting title
     setSize(531, 616); // Setting size
 
+    player1Icon = androidIcon;
+    player2Icon = appleIcon;
+
     setIconImage(androidIcon.getImage()); // setting icon for entire program
+
+    menuBar = new JMenuBar();
+    menuBar.setBackground(new Color(83, 85, 89));
+
+    settingsMenu = new JMenu("Settings");
+    menuBar.add(settingsMenu);
+
+    androidVsAppleMenuItem = new JMenuItem("Android Vs. Apple");
+    xVsOMenuItem = new JMenuItem("X Vs. O");
+    settingsMenu.add(androidVsAppleMenuItem);
+    settingsMenu.add(xVsOMenuItem);
+
+    androidVsAppleMenuItem.addActionListener(this);
+    xVsOMenuItem.addActionListener(this);
+
+    setJMenuBar(menuBar);
 
     Container contentPane = this.getContentPane(); // making content pane for the entire frame
     contentPane.setLayout(new BorderLayout()); // setting it to border layout
@@ -94,34 +118,53 @@ public class GameGui extends JFrame implements ActionListener {
     winnerLabel.setText("It's player " + currentPlayer + "'s turn!"); // resetting the text of the winnerLabel
   }
 
+  public void changeCurrentIcons() {
+    for (JButton button : gridButtons) {
+      if (button.getIcon() == xIcon || button.getIcon() == androidIcon) {
+        button.setIcon(player1Icon);
+      } else if (button.getIcon() == oIcon || button.getIcon() == appleIcon) {
+        button.setIcon(player2Icon);
+      } else button.setIcon(null);
+    }
+  }
+
   public void actionPerformed(ActionEvent event) {
     Object source = event.getSource(); // getting the source
-    JButton button = (JButton) source; // casting it to a game button
 
     if (source == resetButton) {
       // reset everything
       resetGui();
       gameBoard.reset();
-    }
-    else if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
-      if (currentPlayer == 1) {
-        button.setIcon(androidIcon); // setting the image to 'x'
-        gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer); // assigning the owner
-        currentPlayer = 2; // swapping the player
-      } else if (currentPlayer == 2) {
-        button.setIcon(appleIcon); // setting the image to 'o'
-        gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer); // assigning the owner
-        currentPlayer = 1; // swapping the player
+    } else if (source == androidVsAppleMenuItem) {
+      player1Icon = androidIcon;
+      player2Icon = appleIcon;
+      changeCurrentIcons();
+    } else if (source == xVsOMenuItem) {
+      player1Icon = xIcon;
+      player2Icon = oIcon;
+      changeCurrentIcons();
+    } else {
+      JButton button = (JButton) source; // casting it to a game button
+      if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
+        if (currentPlayer == 1) {
+          button.setIcon(player1Icon); // setting the image to 'x'
+          gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer); // assigning the owner
+          currentPlayer = 2; // swapping the player
+        } else if (currentPlayer == 2) {
+          button.setIcon(player2Icon); // setting the image to 'o'
+          gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer); // assigning the owner
+          currentPlayer = 1; // swapping the player
+        }
+
+        if (gameBoard.checkForWin()) { // Checking if there is a winner
+          winnerLabel.setText("Player " + gameBoard.getWinner() + " Won the Round!"); // setting the text
+
+          player1ScoreLabel.setText("Player 1: " + gameBoard.getPlayer1Score()); // setting the text for the score
+          player2ScoreLabel.setText("Player 2: " + gameBoard.getPlayer2Score()); // setting the text for the score
+
+          isGamePlaying = false; // Make the game not playable
+        } else winnerLabel.setText("It's player " + currentPlayer + "'s turn!"); // setting the text for the current players turn
       }
-
-      if (gameBoard.checkForWin()) { // Checking if there is a winner
-        winnerLabel.setText("Player " + gameBoard.getWinner() + " Won the Round!"); // setting the text
-
-        player1ScoreLabel.setText("Player 1: " + gameBoard.getPlayer1Score()); // setting the text for the score
-        player2ScoreLabel.setText("Player 2: " + gameBoard.getPlayer2Score()); // setting the text for the score
-
-        isGamePlaying = false; // Make the game not playable
-      } else winnerLabel.setText("It's player " + currentPlayer + "'s turn!"); // setting the text for the current players turn
     }
   }
 
