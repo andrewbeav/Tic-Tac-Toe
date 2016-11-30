@@ -169,6 +169,8 @@ public class GameGui extends JFrame implements ActionListener {
 	} else {
       JButton button = (JButton) source; // casting it to a game button
       if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
+        currentTime = initialTime;
+        timerLabel.setText("        Time: " + Integer.toString(currentTime));
         if (currentPlayer == 1) {
           button.setIcon(player1Icon); // setting the image to 'x'
           gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer); // assigning the owner
