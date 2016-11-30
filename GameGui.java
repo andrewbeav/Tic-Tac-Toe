@@ -10,7 +10,7 @@ public class GameGui extends JFrame implements ActionListener {
   JLabel winnerLabel, player1ScoreLabel, player2ScoreLabel, timerLabel; // Labels
 
   JMenuBar menuBar;
-  JMenu settingsMenu, imagesMenu;
+  JMenu settingsMenu, imagesMenu, modeMenu;
   JMenuItem androidVsAppleMenuItem, xVsOMenuItem;
 
   javax.swing.Timer timer; // Timer
@@ -60,6 +60,9 @@ public class GameGui extends JFrame implements ActionListener {
     xVsOMenuItem = new JMenuItem("X Vs. O");
     imagesMenu.add(androidVsAppleMenuItem);
     imagesMenu.add(xVsOMenuItem);
+
+    modeMenu = new JMenu("Change Mode");
+    settingsMenu.add(modeMenu);
 
     androidVsAppleMenuItem.addActionListener(this);
     xVsOMenuItem.addActionListener(this);
