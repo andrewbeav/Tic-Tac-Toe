@@ -95,6 +95,7 @@ public class GameGui extends JFrame implements ActionListener {
     contentPane.add(buttonGrid, BorderLayout.CENTER); // adding it to the content pane in the center
 
 	timer = new javax.swing.Timer(1000, this);
+	timer.start();
 
     makeButtonGrid(); // making the grid of buttons
     for (JButton button : gridButtons) { // looping through the list of buttons
@@ -147,7 +148,9 @@ public class GameGui extends JFrame implements ActionListener {
       player1Icon = xIcon;
       player2Icon = oIcon;
       changeCurrentIcons();
-    } else {
+    } else if (source == timer) {
+	  
+	} else {
       JButton button = (JButton) source; // casting it to a game button
       if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
         if (currentPlayer == 1) {
