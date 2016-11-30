@@ -12,6 +12,8 @@ public class GameGui extends JFrame implements ActionListener {
   JMenuBar menuBar;
   JMenu settingsMenu, imagesMenu;
   JMenuItem androidVsAppleMenuItem, xVsOMenuItem;
+  
+  javax.swing.Timer timer; // Timer
 
   // x and o images
   ImageIcon player1Icon, player2Icon;
@@ -91,6 +93,8 @@ public class GameGui extends JFrame implements ActionListener {
     JPanel buttonGrid = new JPanel(); // making new panel for holding the grid of buttons
     buttonGrid.setLayout(new GridLayout(3, 3)); // making a grid layout for the buttons
     contentPane.add(buttonGrid, BorderLayout.CENTER); // adding it to the content pane in the center
+
+	timer = new javax.swing.Timer(1000, this);
 
     makeButtonGrid(); // making the grid of buttons
     for (JButton button : gridButtons) { // looping through the list of buttons
