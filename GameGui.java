@@ -13,6 +13,9 @@ public class GameGui extends JFrame implements ActionListener {
   JMenu settingsMenu, imagesMenu, modeMenu;
   JMenuItem androidVsAppleMenuItem, xVsOMenuItem, ticTacGoModeItem, regularModeItem;
 
+  JMenu timerSettingsMenu;
+  JMenuItem slowItem, mediumItem, fastItem;
+
   javax.swing.Timer timer; // Timer
 
   int initialTime = 3;
