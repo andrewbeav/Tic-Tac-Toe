@@ -157,7 +157,9 @@ public class GameGui extends JFrame implements ActionListener {
 		
 		if (currentTime == 0) {
 			currentTime = initialTime;
+			
 		}
+		
 	} else {
       JButton button = (JButton) source; // casting it to a game button
       if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
@@ -187,6 +189,11 @@ public class GameGui extends JFrame implements ActionListener {
   //
   // These are 'helper' methods. Used for things above.
   //
+
+  public void switchCurrentPlayer() {
+	if (currentPlayer == 1) currentPlayer = 2;
+	else currentPlayer = 1;
+  }
 
   public int findRowOfButton(JButton button) { // This method finds the row for the button
     int row = 0; // initializing the row to 0
