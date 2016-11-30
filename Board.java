@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Board {
-  final int BOARD_SIZE = 3; // Size of the board, probably shouldn't change this
+  private int boardSize = 3; // Size of the board
   private int[][] board; // actual board
   private int winner; // The winner variable
 
@@ -12,7 +12,7 @@ public class Board {
   boolean toPrintOnCommandLine = false; // initializing boolean variable to print grid on command line
 
   private void initBoard() { // This method initializes the board and sets all values to 0
-    board = new int[BOARD_SIZE][BOARD_SIZE];
+    board = new int[boardSize][boardSize];
     for (int r = 0; r < board.length; r++) {
       for (int c = 0; c < board[r].length; c++) {
         board[r][c] = 0;
@@ -30,6 +30,15 @@ public class Board {
 
   public Board() { // Constructor
     initBoard();
+  }
+
+  public Board(int boardSize) { // Alternate Constructor
+    this.boardSize = boardSize;
+    initBoard();
+  }
+
+  public void setBoardSize(int boardSize) {
+    this.boardSize = boardSize;
   }
 
   public void reset() { // Reset method
@@ -70,7 +79,7 @@ public class Board {
         for (int c = 1; c < board.length; c++) {
           if (board[r][c] != valueToCheck) {
             break;
-          } else if (c == 2) {
+          } else if (c == boardSize-1) {
             winner = valueToCheck;
             updateScoreForPlayer(winner);
             return true;
@@ -85,7 +94,7 @@ public class Board {
       if (valueToCheck != 0) {
         for (int r = 1; r < board.length; r++) {
           if (board[r][c] != valueToCheck) break;
-          else if (r == 2) {
+          else if (r == boardSize-1) {
             winner = valueToCheck;
             updateScoreForPlayer(winner);
             return true;
@@ -98,7 +107,7 @@ public class Board {
     if (board[0][0] != 0) {
       for (int i = 1; i < board.length; i++) {
         if (board[i][i] != board[0][0]) break;
-        else if (i == 2) {
+        else if (i == boardSize-1) {
           winner = board[0][0];
           updateScoreForPlayer(winner);
           return true;
@@ -111,7 +120,7 @@ public class Board {
       for (int r = 0; r < board.length; r++) {
         int c = (board.length-1) - r;
         if (board[r][c] != board[0][2]) break;
-        else if (r == 2) {
+        else if (r == boardSize-1) {
           winner = board[0][2];
           updateScoreForPlayer(winner);
           return true;
