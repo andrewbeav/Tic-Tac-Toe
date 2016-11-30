@@ -12,9 +12,9 @@ public class GameGui extends JFrame implements ActionListener {
   JMenuBar menuBar;
   JMenu settingsMenu, imagesMenu;
   JMenuItem androidVsAppleMenuItem, xVsOMenuItem;
-  
+
   javax.swing.Timer timer; // Timer
-  
+
   int initialTime = 3;
   int currentTime = initialTime;
 
@@ -53,10 +53,13 @@ public class GameGui extends JFrame implements ActionListener {
     settingsMenu = new JMenu("Settings");
     menuBar.add(settingsMenu);
 
+    imagesMenu = new JMenu("Change Images");
+    settingsMenu.add(imagesMenu);
+
     androidVsAppleMenuItem = new JMenuItem("Android Vs. Apple");
     xVsOMenuItem = new JMenuItem("X Vs. O");
-    settingsMenu.add(androidVsAppleMenuItem);
-    settingsMenu.add(xVsOMenuItem);
+    imagesMenu.add(androidVsAppleMenuItem);
+    imagesMenu.add(xVsOMenuItem);
 
     androidVsAppleMenuItem.addActionListener(this);
     xVsOMenuItem.addActionListener(this);
@@ -127,7 +130,7 @@ public class GameGui extends JFrame implements ActionListener {
     }
 
     winnerLabel.setText("It's player " + currentPlayer + "'s turn!"); // resetting the text of the winnerLabel
-    
+
     currentTime = initialTime;
     timer.start();
   }
@@ -160,12 +163,12 @@ public class GameGui extends JFrame implements ActionListener {
     } else if (source == timer) { // event handler for timer
 		timerLabel.setText("        Time: " + Integer.toString(currentTime));
 		currentTime--;
-		
+
 		if (currentTime == 0) {
 			currentTime = initialTime;
 			switchCurrentPlayer();
 		}
-		
+
 	} else {
       JButton button = (JButton) source; // casting it to a game button
       if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
@@ -204,7 +207,7 @@ public class GameGui extends JFrame implements ActionListener {
 		currentPlayer = 2;
 	}
 	else currentPlayer = 1;
-	
+
 	winnerLabel.setText("It's player " + currentPlayer + "'s turn!");
   }
 
