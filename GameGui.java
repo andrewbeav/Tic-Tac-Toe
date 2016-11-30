@@ -155,7 +155,7 @@ public class GameGui extends JFrame implements ActionListener {
       player2Icon = oIcon;
       changeCurrentIcons();
     } else if (source == timer) { // event handler for timer
-		System.out.println(currentTime);
+		timerLabel.setText("        Time: " + Integer.toString(currentTime));
 		currentTime--;
 		
 		if (currentTime == 0) {
