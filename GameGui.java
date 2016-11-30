@@ -18,6 +18,8 @@ public class GameGui extends JFrame implements ActionListener {
   int initialTime = 3;
   int currentTime = initialTime;
 
+  boolean isTimedMode = false;
+
   // x and o images
   ImageIcon player1Icon, player2Icon;
 
@@ -102,8 +104,8 @@ public class GameGui extends JFrame implements ActionListener {
     player2ScoreLabel = new JLabel("Player 2: 0"); // making label for scores
     topArea.add(player2ScoreLabel); // adding it to the topArea
 
-	timerLabel = new JLabel("        Time: " + Integer.toString(currentTime)); // making label for timer
-	topArea.add(timerLabel);
+  	timerLabel = new JLabel(); // making label for timer
+  	topArea.add(timerLabel);
 
     winnerLabel = new JLabel(); // making new label for the winner
     winnerLabel.setText("It's player " + currentPlayer + "'s turn!"); // setting the text
@@ -114,8 +116,8 @@ public class GameGui extends JFrame implements ActionListener {
     buttonGrid.setLayout(new GridLayout(3, 3)); // making a grid layout for the buttons
     contentPane.add(buttonGrid, BorderLayout.CENTER); // adding it to the content pane in the center
 
-	timer = new javax.swing.Timer(1000, this);
-	timer.start();
+  	timer = new javax.swing.Timer(1000, this);
+  	timer.start();
 
     makeButtonGrid(); // making the grid of buttons
     for (JButton button : gridButtons) { // looping through the list of buttons
@@ -160,31 +162,30 @@ public class GameGui extends JFrame implements ActionListener {
     Object source = event.getSource(); // getting the source
 
     if (source == resetButton) {
-      // reset everything
-      resetGui();
-      gameBoard.reset();
+        // reset everything
+        resetGui();
+        gameBoard.reset();
     } else if (source == androidVsAppleMenuItem) {
-      player1Icon = androidIcon;
-      player2Icon = appleIcon;
-      changeCurrentIcons();
+        player1Icon = androidIcon;
+        player2Icon = appleIcon;
+        changeCurrentIcons();
     } else if (source == xVsOMenuItem) {
-      player1Icon = xIcon;
-      player2Icon = oIcon;
-      changeCurrentIcons();
-    } else if (source == timer) { // event handler for timer
-		timerLabel.setText("        Time: " + Integer.toString(currentTime));
-		currentTime--;
-
+        player1Icon = xIcon;
+        player2Icon = oIcon;
+        changeCurrentIcons();
+    } else if (source == timer && isTimedMode) { // event handler for timer
+    		timerLabel.setText("        Time: " + Integer.toString(currentTime));
+    		currentTime--;
 		if (currentTime == 0) {
 			currentTime = initialTime;
 			switchCurrentPlayer();
 		}
 
-	} else {
+	} else if (source != timer) {
       JButton button = (JButton) source; // casting it to a game button
       if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
         currentTime = initialTime;
-        timerLabel.setText("        Time: " + Integer.toString(currentTime));
+        if (isTimedMode) timerLabel.setText("        Time: " + Integer.toString(currentTime));
         if (currentPlayer == 1) {
           button.setIcon(player1Icon); // setting the image to 'x'
           gameBoard.assignOwner(findRowOfButton(button), findColumnOfButton(button), currentPlayer); // assigning the owner
@@ -214,12 +215,12 @@ public class GameGui extends JFrame implements ActionListener {
   //
 
   public void switchCurrentPlayer() {
-	if (currentPlayer == 1) {
-		currentPlayer = 2;
-	}
-	else currentPlayer = 1;
+  	if (currentPlayer == 1) {
+  		currentPlayer = 2;
+  	}
+  	else currentPlayer = 1;
 
-	winnerLabel.setText("It's player " + currentPlayer + "'s turn!");
+  	winnerLabel.setText("It's player " + currentPlayer + "'s turn!");
   }
 
   public int findRowOfButton(JButton button) { // This method finds the row for the button
