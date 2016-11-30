@@ -179,6 +179,13 @@ public class GameGui extends JFrame implements ActionListener {
     fastItem.addActionListener(this);
   }
 
+  public void startRegularMode() {
+    isTimedMode = false;
+
+    menuBar.remove(timerSettingsMenu);
+    timerLabel.setText(null);
+  }
+
   public void actionPerformed(ActionEvent event) {
     Object source = event.getSource(); // getting the source
 
@@ -195,7 +202,7 @@ public class GameGui extends JFrame implements ActionListener {
         player2Icon = oIcon;
         changeCurrentIcons();
     } else if (source == regularModeItem) {
-        isTimedMode = false;
+        startRegularMode();
     } else if (source == ticTacGoModeItem) {
         startTimedMode();
     } else if (source == slowItem) {
