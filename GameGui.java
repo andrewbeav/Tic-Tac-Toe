@@ -11,7 +11,7 @@ public class GameGui extends JFrame implements ActionListener {
 
   JMenuBar menuBar;
   JMenu settingsMenu, imagesMenu, modeMenu;
-  JMenuItem androidVsAppleMenuItem, xVsOMenuItem;
+  JMenuItem androidVsAppleMenuItem, xVsOMenuItem, ticTacGoModeItem, regularModeItem;
 
   javax.swing.Timer timer; // Timer
 
@@ -64,8 +64,16 @@ public class GameGui extends JFrame implements ActionListener {
     modeMenu = new JMenu("Change Mode");
     settingsMenu.add(modeMenu);
 
+    regularModeItem = new JMenuItem("Regular Tic Tac Toe");
+    modeMenu.add(regularModeItem);
+
+    ticTacGoModeItem = new JMenuItem("Tic Tac GO!");
+    modeMenu.add(ticTacGoModeItem);
+
     androidVsAppleMenuItem.addActionListener(this);
     xVsOMenuItem.addActionListener(this);
+    regularModeItem.addActionListener(this);
+    ticTacGoModeItem.addActionListener(this);
 
     setJMenuBar(menuBar);
 
