@@ -7,7 +7,7 @@ public class GameGui extends JFrame implements ActionListener {
 
   ArrayList<JButton> gridButtons = new ArrayList<>(9); // List of buttons
   JButton resetButton; // button to reset game
-  JLabel winnerLabel, player1ScoreLabel, player2ScoreLabel; // Labels
+  JLabel winnerLabel, player1ScoreLabel, player2ScoreLabel, timerLabel; // Labels
 
   JMenuBar menuBar;
   JMenu settingsMenu, imagesMenu;
@@ -87,6 +87,9 @@ public class GameGui extends JFrame implements ActionListener {
 
     player2ScoreLabel = new JLabel("Player 2: 0"); // making label for scores
     topArea.add(player2ScoreLabel); // adding it to the topArea
+
+	timerLabel = new JLabel("        Time: " + Integer.toString(currentTime)); // making label for timer
+	topArea.add(timerLabel);
 
     winnerLabel = new JLabel(); // making new label for the winner
     winnerLabel.setText("It's player " + currentPlayer + "'s turn!"); // setting the text
