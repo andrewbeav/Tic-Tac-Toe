@@ -157,7 +157,7 @@ public class GameGui extends JFrame implements ActionListener {
 		
 		if (currentTime == 0) {
 			currentTime = initialTime;
-			
+			switchCurrentPlayer();
 		}
 		
 	} else {
