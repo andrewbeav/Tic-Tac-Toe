@@ -183,6 +183,7 @@ public class GameGui extends JFrame implements ActionListener {
           player2ScoreLabel.setText("Player 2: " + gameBoard.getPlayer2Score()); // setting the text for the score
 
           isGamePlaying = false; // Make the game not playable
+          timer.stop();
         } else winnerLabel.setText("It's player " + currentPlayer + "'s turn!"); // setting the text for the current players turn
       }
     }
@@ -194,8 +195,12 @@ public class GameGui extends JFrame implements ActionListener {
   //
 
   public void switchCurrentPlayer() {
-	if (currentPlayer == 1) currentPlayer = 2;
+	if (currentPlayer == 1) {
+		currentPlayer = 2;
+	}
 	else currentPlayer = 1;
+	
+	winnerLabel.setText("It's player " + currentPlayer + "'s turn!");
   }
 
   public int findRowOfButton(JButton button) { // This method finds the row for the button
