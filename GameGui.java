@@ -198,6 +198,12 @@ public class GameGui extends JFrame implements ActionListener {
         isTimedMode = false;
     } else if (source == ticTacGoModeItem) {
         startTimedMode();
+    } else if (source == slowItem) {
+        timer.setDelay(1000);
+    } else if (source == mediumItem) {
+        timer.setDelay(800);
+    } else if (source == fastItem) {
+        timer.setDelay(500);
     } else if (source == timer && isTimedMode) { // event handler for timer
     		timerLabel.setText("        Time: " + Integer.toString(currentTime));
     		currentTime--;
