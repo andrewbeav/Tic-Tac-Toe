@@ -127,6 +127,9 @@ public class GameGui extends JFrame implements ActionListener {
     }
 
     winnerLabel.setText("It's player " + currentPlayer + "'s turn!"); // resetting the text of the winnerLabel
+    
+    currentTime = initialTime;
+    timer.start();
   }
 
   public void changeCurrentIcons() {
