@@ -173,6 +173,10 @@ public class GameGui extends JFrame implements ActionListener {
         player1Icon = xIcon;
         player2Icon = oIcon;
         changeCurrentIcons();
+    } else if (source == regularModeItem) {
+        isTimedMode = false;
+    } else if (source == ticTacGoModeItem) {
+        isTimedMode = true;
     } else if (source == timer && isTimedMode) { // event handler for timer
     		timerLabel.setText("        Time: " + Integer.toString(currentTime));
     		currentTime--;
