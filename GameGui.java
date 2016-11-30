@@ -161,6 +161,19 @@ public class GameGui extends JFrame implements ActionListener {
     }
   }
 
+  public void startTimedMode() {
+    isTimedMode = true;
+    timerSettingsMenu = new JMenu("Timer speed");
+
+    slowItem = new JMenuItem("Slow");
+    mediumItem = new JMenuItem("Medium");
+    fastItem = new JMenuItem("Fast");
+
+    slowItem.addActionListener(this);
+    mediumItem.addActionListener(this);
+    fastItem.addActionListener(this);
+  }
+
   public void actionPerformed(ActionEvent event) {
     Object source = event.getSource(); // getting the source
 
@@ -179,7 +192,7 @@ public class GameGui extends JFrame implements ActionListener {
     } else if (source == regularModeItem) {
         isTimedMode = false;
     } else if (source == ticTacGoModeItem) {
-        isTimedMode = true;
+        startTimedMode();
     } else if (source == timer && isTimedMode) { // event handler for timer
     		timerLabel.setText("        Time: " + Integer.toString(currentTime));
     		currentTime--;
