@@ -15,7 +15,8 @@ public class GameGui extends JFrame implements ActionListener {
   
   javax.swing.Timer timer; // Timer
   
-  int currentTime = 3;
+  int initialTime = 3;
+  int currentTime = initialTime;
 
   // x and o images
   ImageIcon player1Icon, player2Icon;
@@ -151,7 +152,12 @@ public class GameGui extends JFrame implements ActionListener {
       player2Icon = oIcon;
       changeCurrentIcons();
     } else if (source == timer) { // event handler for timer
-	  
+		System.out.println(currentTime);
+		currentTime--;
+		
+		if (currentTime == 0) {
+			currentTime = initialTime;
+		}
 	} else {
       JButton button = (JButton) source; // casting it to a game button
       if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
