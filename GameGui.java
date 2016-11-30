@@ -164,10 +164,15 @@ public class GameGui extends JFrame implements ActionListener {
   public void startTimedMode() {
     isTimedMode = true;
     timerSettingsMenu = new JMenu("Timer speed");
+    menuBar.add(timerSettingsMenu);
 
     slowItem = new JMenuItem("Slow");
     mediumItem = new JMenuItem("Medium");
     fastItem = new JMenuItem("Fast");
+
+    timerSettingsMenu.add(slowItem);
+    timerSettingsMenu.add(mediumItem);
+    timerSettingsMenu.add(fastItem);
 
     slowItem.addActionListener(this);
     mediumItem.addActionListener(this);
