@@ -14,6 +14,8 @@ public class GameGui extends JFrame implements ActionListener {
   JMenuItem androidVsAppleMenuItem, xVsOMenuItem;
   
   javax.swing.Timer timer; // Timer
+  
+  int currentTime = 3;
 
   // x and o images
   ImageIcon player1Icon, player2Icon;
@@ -148,7 +150,7 @@ public class GameGui extends JFrame implements ActionListener {
       player1Icon = xIcon;
       player2Icon = oIcon;
       changeCurrentIcons();
-    } else if (source == timer) {
+    } else if (source == timer) { // event handler for timer
 	  
 	} else {
       JButton button = (JButton) source; // casting it to a game button
