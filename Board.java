@@ -68,6 +68,20 @@ public class Board {
     }
   }
 
+  public boolean checkForScratch() {
+    int count = 0;
+
+    for (int r = 0; r < boardSize; r++) {
+      for (int c = 0; c < boardSize; c++) {
+        if (checkIfOwned(r, c)) count++;
+      }
+    }
+
+    if (count == Math.pow(boardSize, 2)) return true;
+
+    return false;
+  }
+
   public boolean checkForWin() { // This method checks if there is a winner
 
     // Checking horizontal matches

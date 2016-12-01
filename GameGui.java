@@ -269,6 +269,11 @@ public class GameGui extends JFrame implements ActionListener {
 
           isGamePlaying = false; // Make the game not playable
           timer.stop();
+        } else if (gameBoard.checkForScratch()) {
+            winnerLabel.setText("Scratch!");
+
+            isGamePlaying = false;
+            timer.stop();
         } else winnerLabel.setText("It's player " + currentPlayer + "'s turn!"); // setting the text for the current players turn
       }
     }
