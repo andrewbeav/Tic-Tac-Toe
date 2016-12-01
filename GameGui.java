@@ -1,11 +1,12 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import javax.swing.*;
+import javax.swing.JMenuItem;
 
 public class GameGui extends JFrame implements ActionListener {
 
-  int boardSize = 3; // size of board (default to 3)
+  int boardSize; // size of board (default to 3)
 
   final int ICON_SIZE = 75; // size in pixels images HAVE to be
 
@@ -16,11 +17,14 @@ public class GameGui extends JFrame implements ActionListener {
   JMenuBar menuBar;
   JMenu settingsMenu, imagesMenu, modeMenu;
   JMenuItem androidVsAppleMenuItem, xVsOMenuItem, ticTacGoModeItem, regularModeItem;
+  JMenuItem changeSizeItem;
 
   JMenu timerSettingsMenu;
   JMenuItem slowItem, mediumItem, fastItem;
 
   javax.swing.Timer timer; // Timer
+
+  SetBoardSizeWindow setBoardSizeWindow;
 
   int initialTime = 3;
   int currentTime = initialTime;
@@ -36,7 +40,7 @@ public class GameGui extends JFrame implements ActionListener {
   final ImageIcon xIcon = new ImageIcon(getClass().getClassLoader().getResource("x.png"));
   final ImageIcon oIcon = new ImageIcon(getClass().getClassLoader().getResource("o.png"));
 
-  Board gameBoard = new Board(boardSize); // Creating new board object
+  Board gameBoard; // Creating new board object
   int currentPlayer = 1; // setting current player
   int initialPlayer = 1; // setting the initialPlayer (beginning of game)
   boolean isGamePlaying = true; // setting boolean to see if the game is playing
@@ -49,9 +53,13 @@ public class GameGui extends JFrame implements ActionListener {
     }
   }
 
-  public GameGui() { // Constructor
+  public GameGui(int boardSize) { // Constructor
     super("Tic Tac Toe"); // Setting title
     setSize((ICON_SIZE+30)*boardSize, (ICON_SIZE+50)*boardSize); // Setting size
+
+    this.boardSize = boardSize;
+
+    gameBoard = new Board(boardSize);
 
     player1Icon = androidIcon;
     player2Icon = appleIcon;
@@ -81,10 +89,15 @@ public class GameGui extends JFrame implements ActionListener {
     ticTacGoModeItem = new JMenuItem("Tic Tac GO!");
     modeMenu.add(ticTacGoModeItem);
 
+    changeSizeItem = new JMenuItem("Change Board Size");
+    changeSizeItem.setBackground(new Color(83, 85, 89));
+    menuBar.add(changeSizeItem);
+
     androidVsAppleMenuItem.addActionListener(this);
     xVsOMenuItem.addActionListener(this);
     regularModeItem.addActionListener(this);
     ticTacGoModeItem.addActionListener(this);
+    changeSizeItem.addActionListener(this);
 
     setJMenuBar(menuBar);
 
@@ -156,7 +169,7 @@ public class GameGui extends JFrame implements ActionListener {
     currentTime = initialTime;
     timer.start();
 
-    timerWindow.reset();
+    if (isTimedMode) timerWindow.reset();
   }
 
   public void changeCurrentIcons() {
@@ -225,6 +238,10 @@ public class GameGui extends JFrame implements ActionListener {
         timer.setDelay(800);
     } else if (source == fastItem) {
         timer.setDelay(500);
+    } else if (source == changeSizeItem) {
+        setBoardSizeWindow = new SetBoardSizeWindow();
+        setBoardSizeWindow.setVisible(true);
+        this.setVisible(false);
     } else if (source == timer && isTimedMode) { // event handler for timer
     		//timerLabel.setText("        Time: " + Integer.toString(currentTime));
     		//currentTime--;

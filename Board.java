@@ -12,9 +12,8 @@ public class Board {
   boolean toPrintOnCommandLine = false; // initializing boolean variable to print grid on command line
 
   private void initBoard() { // This method initializes the board and sets all values to 0
-    board = new int[boardSize][boardSize];
-    for (int r = 0; r < board.length; r++) {
-      for (int c = 0; c < board[r].length; c++) {
+    for (int r = 0; r < boardSize; r++) {
+      for (int c = 0; c < boardSize; c++) {
         board[r][c] = 0;
       }
     }
@@ -28,12 +27,10 @@ public class Board {
     return player2Score;
   }
 
-  public Board() { // Constructor
-    initBoard();
-  }
-
-  public Board(int boardSize) { // Alternate Constructor
+  public Board(int boardSize) {
     this.boardSize = boardSize;
+
+    board = new int[boardSize][boardSize];
     initBoard();
   }
 
@@ -55,7 +52,8 @@ public class Board {
   }
 
   public boolean checkIfOwned(int r, int c) { // This method checks if a cell is occupied
-    if (board[r][c] == 0) return false;
+    if (r >= 0 && r < board.length && c >= 0 &&
+        c < board[r].length && board[r][c] == 0) return false;
     else return true;
   }
 
