@@ -43,6 +43,7 @@ public class SetBoardSizeWindow extends JFrame implements ActionListener {
       gui.setVisible(true); // making it visible
       gui.setResizable(false);
       gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // setting default close operation
+	  this.setVisible(false);
     }
   }
 
