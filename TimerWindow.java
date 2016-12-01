@@ -23,6 +23,8 @@ public class TimerWindow extends JFrame implements ActionListener {
     Container contentPane = this.getContentPane();
     contentPane.setLayout(new BorderLayout());
 
+    contentPane.setBackground(new Color(83, 85, 89));
+
     infoLabel = new JLabel("Time left: ");
     infoLabel.setHorizontalAlignment(JLabel.CENTER);
     contentPane.add(infoLabel, BorderLayout.NORTH);
