@@ -1,22 +1,30 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import javax.swing.*;
+import javax.swing.JMenuItem;
 
 public class GameGui extends JFrame implements ActionListener {
 
-  ArrayList<JButton> gridButtons = new ArrayList<>(9); // List of buttons
+  int boardSize; // size of board (default to 3)
+
+  final int ICON_SIZE = 75; // size in pixels images HAVE to be
+
+  ArrayList<JButton> gridButtons = new ArrayList<>(boardSize * boardSize); // List of buttons
   JButton resetButton; // button to reset game
   JLabel winnerLabel, player1ScoreLabel, player2ScoreLabel, timerLabel; // Labels
 
   JMenuBar menuBar;
   JMenu settingsMenu, imagesMenu, modeMenu;
   JMenuItem androidVsAppleMenuItem, xVsOMenuItem, ticTacGoModeItem, regularModeItem;
+  JMenuItem changeSizeItem;
 
   JMenu timerSettingsMenu;
   JMenuItem slowItem, mediumItem, fastItem;
 
   javax.swing.Timer timer; // Timer
+
+  SetBoardSizeWindow setBoardSizeWindow;
 
   int initialTime = 3;
   int currentTime = initialTime;
@@ -32,20 +40,26 @@ public class GameGui extends JFrame implements ActionListener {
   final ImageIcon xIcon = new ImageIcon(getClass().getClassLoader().getResource("x.png"));
   final ImageIcon oIcon = new ImageIcon(getClass().getClassLoader().getResource("o.png"));
 
-  Board gameBoard = new Board(); // Creating new board object
+  Board gameBoard; // Creating new board object
   int currentPlayer = 1; // setting current player
   int initialPlayer = 1; // setting the initialPlayer (beginning of game)
   boolean isGamePlaying = true; // setting boolean to see if the game is playing
 
+  TimerWindow timerWindow;
+
   public void makeButtonGrid() { // Creating buttons and adding them to the list
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < boardSize*boardSize; i++) {
       gridButtons.add(new JButton());
     }
   }
 
-  public GameGui() { // Constructor
+  public GameGui(int boardSize) { // Constructor
     super("Tic Tac Toe"); // Setting title
-    setSize(531, 616); // Setting size
+    setSize((ICON_SIZE+30)*boardSize, (ICON_SIZE+50)*boardSize); // Setting size
+
+    this.boardSize = boardSize;
+
+    gameBoard = new Board(boardSize);
 
     player1Icon = androidIcon;
     player2Icon = appleIcon;
@@ -75,10 +89,15 @@ public class GameGui extends JFrame implements ActionListener {
     ticTacGoModeItem = new JMenuItem("Tic Tac GO!");
     modeMenu.add(ticTacGoModeItem);
 
+    changeSizeItem = new JMenuItem("Change Board Size");
+    changeSizeItem.setBackground(new Color(83, 85, 89));
+    menuBar.add(changeSizeItem);
+
     androidVsAppleMenuItem.addActionListener(this);
     xVsOMenuItem.addActionListener(this);
     regularModeItem.addActionListener(this);
     ticTacGoModeItem.addActionListener(this);
+    changeSizeItem.addActionListener(this);
 
     setJMenuBar(menuBar);
 
@@ -116,7 +135,7 @@ public class GameGui extends JFrame implements ActionListener {
     bottomArea.add(winnerLabel);// adding it to the bottomArea
 
     JPanel buttonGrid = new JPanel(); // making new panel for holding the grid of buttons
-    buttonGrid.setLayout(new GridLayout(3, 3)); // making a grid layout for the buttons
+    buttonGrid.setLayout(new GridLayout(boardSize, boardSize)); // making a grid layout for the buttons
     contentPane.add(buttonGrid, BorderLayout.CENTER); // adding it to the content pane in the center
 
   	timer = new javax.swing.Timer(1000, this);
@@ -149,6 +168,8 @@ public class GameGui extends JFrame implements ActionListener {
 
     currentTime = initialTime;
     timer.start();
+
+    if (isTimedMode) timerWindow.reset();
   }
 
   public void changeCurrentIcons() {
@@ -165,6 +186,10 @@ public class GameGui extends JFrame implements ActionListener {
     isTimedMode = true;
     timerSettingsMenu = new JMenu("Timer speed");
     menuBar.add(timerSettingsMenu);
+
+    timerWindow = new TimerWindow();
+    timerWindow.setVisible(true);
+    timerWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     slowItem = new JMenuItem("Slow");
     mediumItem = new JMenuItem("Medium");
@@ -184,6 +209,8 @@ public class GameGui extends JFrame implements ActionListener {
 
     menuBar.remove(timerSettingsMenu);
     timerLabel.setText(null);
+
+    timerWindow.setVisible(false);
   }
 
   public void actionPerformed(ActionEvent event) {
@@ -211,14 +238,14 @@ public class GameGui extends JFrame implements ActionListener {
         timer.setDelay(800);
     } else if (source == fastItem) {
         timer.setDelay(500);
+    } else if (source == changeSizeItem) {
+        setBoardSizeWindow = new SetBoardSizeWindow();
+        setBoardSizeWindow.setVisible(true);
+        this.setVisible(false);
     } else if (source == timer && isTimedMode) { // event handler for timer
-    		timerLabel.setText("        Time: " + Integer.toString(currentTime));
-    		currentTime--;
-		if (currentTime == 0) {
-			currentTime = initialTime;
-			switchCurrentPlayer();
-		}
-
+    		//timerLabel.setText("        Time: " + Integer.toString(currentTime));
+    		//currentTime--;
+    		if (timerWindow.update() == true) switchCurrentPlayer();
 	} else if (source != timer) {
       JButton button = (JButton) source; // casting it to a game button
       if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
@@ -273,6 +300,11 @@ public class GameGui extends JFrame implements ActionListener {
     } else if (btnNum < 9) {
       row = 2;
     }
+    int minVal = 0;
+    for (int r = 0; r < boardSize; r++) {
+      if (btnNum < (boardSize*(r+1)) && btnNum >= minVal) row = r;
+      minVal += boardSize;
+    }
 
     return row; // returning that row
   }
@@ -282,12 +314,8 @@ public class GameGui extends JFrame implements ActionListener {
     int btnNum = findIndexOfButton(button); // finding the index of the button
 
     // Checking each case to see what column it is in.
-    if (btnNum % 3 == 0) {
-      column = 0;
-    } else if (btnNum % 3 == 1) {
-      column = 1;
-    } else if (btnNum % 3 == 2) {
-      column = 2;
+    for (int c = 0; c < boardSize; c++) {
+      if (btnNum % boardSize == c) column = c;
     }
 
     return column; // returning the column
