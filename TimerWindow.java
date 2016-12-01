@@ -7,8 +7,8 @@ public class TimerWindow extends JFrame implements ActionListener {
   JLabel infoLabel;
   JLabel timeText;
 
-  javax.swing.Timer timer;
-  int timerSpeed = 1000, currentTime = 3;
+  //javax.swing.Timer timer;
+  int currentTime = 3;
 
   public TimerWindow() {
     super("Timer");
@@ -32,17 +32,39 @@ public class TimerWindow extends JFrame implements ActionListener {
     timeText.setFont(new Font(timeText.getFont().getName(), Font.PLAIN, 100));
     contentPane.add(timeText, BorderLayout.CENTER);
 
-    timer = new javax.swing.Timer(timerSpeed, this);
-    timer.start();
+    //timer = new javax.swing.Timer(timerSpeed, this);
+    //timer.start();
+  }
+
+  public void reset() {
+    currentTime = 3;
+    timeText.setText(Integer.toString(currentTime));
+  }
+
+  public boolean update() {
+    boolean toSwitch = false;
+
+    timeText.setText(Integer.toString(currentTime));
+    currentTime--;
+    if (currentTime == 0) {
+      currentTime = 3;
+      toSwitch = true;
+    }
+
+    return toSwitch;
+  }
+
+  public int getCurrentTime() {
+    return currentTime;
   }
 
   public void actionPerformed(ActionEvent event) {
     Object source = event.getSource();
 
-    if (source == timer) {
-      currentTime--;
-      if (currentTime < 0) currentTime = 3;
+    /*if (source == timer) {
       timeText.setText(Integer.toString(currentTime));
-    }
+      currentTime--;
+      if (currentTime == 0) currentTime = 3;
+    }*/
   }
 }
