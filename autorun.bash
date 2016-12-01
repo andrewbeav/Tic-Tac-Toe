@@ -1,1 +1,4 @@
-java -jar TicTacToe.jar
+#!/bin/bash
+
+javac *.java
+java Main

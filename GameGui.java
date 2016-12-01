@@ -41,6 +41,8 @@ public class GameGui extends JFrame implements ActionListener {
   int initialPlayer = 1; // setting the initialPlayer (beginning of game)
   boolean isGamePlaying = true; // setting boolean to see if the game is playing
 
+  TimerWindow timerWindow;
+
   public void makeButtonGrid() { // Creating buttons and adding them to the list
     for (int i = 0; i < boardSize*boardSize; i++) {
       gridButtons.add(new JButton());
@@ -153,6 +155,8 @@ public class GameGui extends JFrame implements ActionListener {
 
     currentTime = initialTime;
     timer.start();
+
+    timerWindow.reset();
   }
 
   public void changeCurrentIcons() {
@@ -169,6 +173,10 @@ public class GameGui extends JFrame implements ActionListener {
     isTimedMode = true;
     timerSettingsMenu = new JMenu("Timer speed");
     menuBar.add(timerSettingsMenu);
+
+    timerWindow = new TimerWindow();
+    timerWindow.setVisible(true);
+    timerWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     slowItem = new JMenuItem("Slow");
     mediumItem = new JMenuItem("Medium");
@@ -188,6 +196,8 @@ public class GameGui extends JFrame implements ActionListener {
 
     menuBar.remove(timerSettingsMenu);
     timerLabel.setText(null);
+
+    timerWindow.setVisible(false);
   }
 
   public void actionPerformed(ActionEvent event) {
@@ -216,13 +226,9 @@ public class GameGui extends JFrame implements ActionListener {
     } else if (source == fastItem) {
         timer.setDelay(500);
     } else if (source == timer && isTimedMode) { // event handler for timer
-    		timerLabel.setText("        Time: " + Integer.toString(currentTime));
-    		currentTime--;
-		if (currentTime == 0) {
-			currentTime = initialTime;
-			switchCurrentPlayer();
-		}
-
+    		//timerLabel.setText("        Time: " + Integer.toString(currentTime));
+    		//currentTime--;
+    		if (timerWindow.update() == true) switchCurrentPlayer();
 	} else if (source != timer) {
       JButton button = (JButton) source; // casting it to a game button
       if (isGamePlaying && !gameBoard.checkIfOwned(findRowOfButton(button), findColumnOfButton(button))) {
