@@ -128,12 +128,12 @@ public class Board {
     }
 
     // Checking diagonal (right to left)
-    if (board[0][2] != 0) {
+    if (board[0][boardSize-1] != 0) {
       for (int r = 0; r < board.length; r++) {
         int c = (board.length-1) - r;
-        if (board[r][c] != board[0][2]) break;
+        if (board[r][c] != board[0][boardSize-1]) break;
         else if (r == boardSize-1) {
-          winner = board[0][2];
+          winner = board[0][boardSize-1];
           updateScoreForPlayer(winner);
           return true;
         }
