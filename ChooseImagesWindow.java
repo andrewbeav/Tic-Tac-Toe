@@ -15,10 +15,10 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
 
   public ChooseImagesWindow() {
     super("Choose Images");
-    setSize(200, 300);
+    setSize(450, 100);
 
     Container contentPane = this.getContentPane();
-    contentPane.setLayout(new FlowLayout());
+    contentPane.setLayout(new GridLayout(2, 2));
 
     player1ChooseButton = new JButton("Choose Image For Player 1:");
     player2ChooseButton = new JButton("Choose Image For Player 2:");
