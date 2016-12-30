@@ -26,8 +26,13 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
     player1ChooseButton.addActionListener(this);
     player2ChooseButton.addActionListener(this);
 
+    player1PathField = new JTextArea("Player 1 Path");
+    player2PathField = new JTextArea("Player 2 Path");
+
     contentPane.add(player1ChooseButton);
+    contentPane.add(player1PathField);
     contentPane.add(player2ChooseButton);
+    contentPane.add(player2PathField);
   }
 
   public void actionPerformed(ActionEvent event) {
