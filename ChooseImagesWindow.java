@@ -72,6 +72,11 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
       player2IconPath = player2IconFileChooser.getSelectedFile().getAbsolutePath();
 
       player2PathField.setText(player2IconPath);
+    } else if (source == submitButton) {
+      player1Icon = new ImageIcon(player1IconPath);
+      player2Icon = new ImageIcon(player2IconPath);
+
+      this.setVisible(false);
     }
   }
 
