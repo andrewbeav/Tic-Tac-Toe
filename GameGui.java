@@ -18,6 +18,7 @@ public class GameGui extends JFrame implements ActionListener {
   JMenu settingsMenu, imagesMenu, modeMenu;
   JMenuItem androidVsAppleMenuItem, xVsOMenuItem, ticTacGoModeItem, regularModeItem;
   JMenuItem changeSizeItem;
+  JMenuItem chooseImageItem;
 
   JMenu timerSettingsMenu;
   JMenuItem slowItem, mediumItem, fastItem;
@@ -80,6 +81,9 @@ public class GameGui extends JFrame implements ActionListener {
     imagesMenu.add(androidVsAppleMenuItem);
     imagesMenu.add(xVsOMenuItem);
 
+    chooseImageItem = new JMenuItem("Choose Custom Images");
+    imagesMenu.add(chooseImageItem);
+
     modeMenu = new JMenu("Change Mode");
     settingsMenu.add(modeMenu);
 
@@ -95,6 +99,7 @@ public class GameGui extends JFrame implements ActionListener {
 
     androidVsAppleMenuItem.addActionListener(this);
     xVsOMenuItem.addActionListener(this);
+    chooseImageItem.addActionListener(this);
     regularModeItem.addActionListener(this);
     ticTacGoModeItem.addActionListener(this);
     changeSizeItem.addActionListener(this);
@@ -204,6 +209,11 @@ public class GameGui extends JFrame implements ActionListener {
     fastItem.addActionListener(this);
   }
 
+  public void setImages(ImageIcon player1Icon, ImageIcon player2Icon) {
+    this.player1Icon = player1Icon;
+    this.player2Icon = player2Icon;
+  }
+
   public void startRegularMode() {
     isTimedMode = false;
 
@@ -228,6 +238,11 @@ public class GameGui extends JFrame implements ActionListener {
         player1Icon = xIcon;
         player2Icon = oIcon;
         changeCurrentIcons();
+    } else if (source == chooseImageItem) {
+        ChooseImagesWindow chooseImageWindow = new ChooseImagesWindow();
+        chooseImageWindow.setVisible(true);
+        chooseImageWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(false);
     } else if (source == regularModeItem) {
         startRegularMode();
     } else if (source == ticTacGoModeItem) {
