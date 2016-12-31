@@ -17,6 +17,7 @@ public class ImageErrorWindow extends JFrame implements ActionListener {
     errorLabel = new JLabel("The File You Selected is Not a Proper Image");
 
     backButton = new JButton("Go Back");
+    backButton.addActionListener(this);
 
     contentPane.add(errorLabel);
     contentPane.add(backButton);
@@ -24,5 +25,9 @@ public class ImageErrorWindow extends JFrame implements ActionListener {
 
   public void actionPerformed(ActionEvent event) {
     Object source = event.getSource();
+
+    if (source == backButton) {
+      this.setVisible(false);
+    }
   }
 }
