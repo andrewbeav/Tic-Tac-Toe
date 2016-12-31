@@ -99,6 +99,7 @@ public class GameGui extends JFrame implements ActionListener {
 
     androidVsAppleMenuItem.addActionListener(this);
     xVsOMenuItem.addActionListener(this);
+    chooseImageItem.addActionListener(this);
     regularModeItem.addActionListener(this);
     ticTacGoModeItem.addActionListener(this);
     changeSizeItem.addActionListener(this);
@@ -208,6 +209,11 @@ public class GameGui extends JFrame implements ActionListener {
     fastItem.addActionListener(this);
   }
 
+  public void setImages(ImageIcon player1Icon, ImageIcon player2Icon) {
+    this.player1Icon = player1Icon;
+    this.player2Icon = player2Icon;
+  }
+
   public void startRegularMode() {
     isTimedMode = false;
 
@@ -232,6 +238,10 @@ public class GameGui extends JFrame implements ActionListener {
         player1Icon = xIcon;
         player2Icon = oIcon;
         changeCurrentIcons();
+    } else if (source == chooseImageItem) {
+        ChooseImagesWindow chooseImageWindow = new ChooseImagesWindow();
+        chooseImageWindow.setVisible(true);
+        this.setVisible(false);
     } else if (source == regularModeItem) {
         startRegularMode();
     } else if (source == ticTacGoModeItem) {

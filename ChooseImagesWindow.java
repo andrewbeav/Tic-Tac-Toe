@@ -77,6 +77,11 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
       player2Icon = new ImageIcon(player2IconPath);
 
       this.setVisible(false);
+
+      GameGui gui = new GameGui(3);
+      gui.setVisible(true);
+      gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      gui.setImages(player1Icon, player2Icon);
     }
   }
 
