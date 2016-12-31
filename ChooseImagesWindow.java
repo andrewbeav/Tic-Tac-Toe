@@ -36,9 +36,11 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
     player2ChooseButton.addActionListener(this);
 
     player1PathField = new JTextArea("Player 1 Path");
+    player1PathField.setEditable(false);
     player1PathField.setBackground(new Color(100, 110, 127));
 
     player2PathField = new JTextArea("Player 2 Path");
+    player2PathField.setEditable(false);
     player2PathField.setBackground(new Color(100, 110, 127));
 
     topArea.add(player1ChooseButton);
