@@ -18,7 +18,10 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
     setSize(450, 100);
 
     Container contentPane = this.getContentPane();
-    contentPane.setLayout(new GridLayout(2, 2));
+    contentPane.setLayout(new BorderLayout());
+
+    JPanel topArea = new JPanel();
+    topArea.setLayout(new GridLayout(2, 2));
 
     player1ChooseButton = new JButton("Choose Image For Player 1:");
     player2ChooseButton = new JButton("Choose Image For Player 2:");
@@ -29,10 +32,12 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
     player1PathField = new JTextArea("Player 1 Path");
     player2PathField = new JTextArea("Player 2 Path");
 
-    contentPane.add(player1ChooseButton);
-    contentPane.add(player1PathField);
-    contentPane.add(player2ChooseButton);
-    contentPane.add(player2PathField);
+    topArea.add(player1ChooseButton);
+    topArea.add(player1PathField);
+    topArea.add(player2ChooseButton);
+    topArea.add(player2PathField);
+
+    contentPane.add(topArea, BorderLayout.NORTH);
   }
 
   public void actionPerformed(ActionEvent event) {
