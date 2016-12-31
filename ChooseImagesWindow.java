@@ -15,7 +15,7 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
 
   public ChooseImagesWindow() {
     super("Choose Images");
-    setSize(450, 100);
+    setSize(450, 115);
 
     Container contentPane = this.getContentPane();
     contentPane.setLayout(new BorderLayout());
