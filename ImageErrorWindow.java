@@ -14,9 +14,12 @@ public class ImageErrorWindow extends JFrame implements ActionListener {
     Container contentPane = this.getContentPane();
     contentPane.setLayout(new FlowLayout());
 
+    contentPane.setBackground(new Color(83, 85, 89));
+
     errorLabel = new JLabel("The File You Selected is Not a Proper Image");
 
     backButton = new JButton("Go Back");
+    backButton.setBackground(new Color(100, 110, 127));
     backButton.addActionListener(this);
 
     contentPane.add(errorLabel);
