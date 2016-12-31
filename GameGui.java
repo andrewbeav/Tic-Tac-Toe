@@ -241,6 +241,7 @@ public class GameGui extends JFrame implements ActionListener {
     } else if (source == chooseImageItem) {
         ChooseImagesWindow chooseImageWindow = new ChooseImagesWindow();
         chooseImageWindow.setVisible(true);
+        chooseImageWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(false);
     } else if (source == regularModeItem) {
         startRegularMode();
