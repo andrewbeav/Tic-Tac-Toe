@@ -15,22 +15,31 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
 
   public ChooseImagesWindow() {
     super("Choose Images");
-    setSize(450, 115);
+    setSize(450, 110);
 
     Container contentPane = this.getContentPane();
+    contentPane.setBackground(new Color(83, 85, 89));
     contentPane.setLayout(new BorderLayout());
 
     JPanel topArea = new JPanel();
     topArea.setLayout(new GridLayout(2, 2));
 
+    topArea.setBackground(new Color(83, 85, 89));
+
     player1ChooseButton = new JButton("Choose Image For Player 1:");
     player2ChooseButton = new JButton("Choose Image For Player 2:");
+
+    player1ChooseButton.setBackground(new Color(100, 110, 127));
+    player2ChooseButton.setBackground(new Color(100, 110, 127));
 
     player1ChooseButton.addActionListener(this);
     player2ChooseButton.addActionListener(this);
 
     player1PathField = new JTextArea("Player 1 Path");
+    player1PathField.setBackground(new Color(100, 110, 127));
+
     player2PathField = new JTextArea("Player 2 Path");
+    player2PathField.setBackground(new Color(100, 110, 127));
 
     topArea.add(player1ChooseButton);
     topArea.add(player1PathField);
@@ -42,7 +51,10 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
     JPanel bottomArea = new JPanel();
     bottomArea.setLayout(new FlowLayout());
 
+    bottomArea.setBackground(new Color(83, 85, 89));
+
     submitButton = new JButton("Submit");
+    submitButton.setBackground(new Color(100, 110, 127));
     submitButton.addActionListener(this);
 
     bottomArea.add(submitButton);
