@@ -101,7 +101,9 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
             gui.setImages(player1Icon, player2Icon);
       }
       else {
-        System.out.println("Not an Image!");
+        ImageErrorWindow errorWindow = new ImageErrorWindow();
+        errorWindow.setVisible(true);
+        errorWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       }
     }
   }
