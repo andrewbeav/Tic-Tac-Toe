@@ -9,7 +9,7 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
   private ImageIcon player1Icon, player2Icon;
   private String player1IconPath, player2IconPath;
 
-  private JButton player1ChooseButton, player2ChooseButton;
+  private JButton player1ChooseButton, player2ChooseButton, submitButton;
   private JTextArea player1PathField, player2PathField;
   private JFileChooser player1IconFileChooser, player2IconFileChooser;
 
@@ -38,6 +38,16 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
     topArea.add(player2PathField);
 
     contentPane.add(topArea, BorderLayout.NORTH);
+
+    JPanel bottomArea = new JPanel();
+    bottomArea.setLayout(new FlowLayout());
+
+    submitButton = new JButton("Submit");
+    submitButton.addActionListener(this);
+
+    bottomArea.add(submitButton);
+
+    contentPane.add(bottomArea, BorderLayout.SOUTH);
   }
 
   public void actionPerformed(ActionEvent event) {
