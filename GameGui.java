@@ -18,6 +18,7 @@ public class GameGui extends JFrame implements ActionListener {
   JMenu settingsMenu, imagesMenu, modeMenu;
   JMenuItem androidVsAppleMenuItem, xVsOMenuItem, ticTacGoModeItem, regularModeItem;
   JMenuItem changeSizeItem;
+  JMenuItem chooseImageItem;
 
   JMenu timerSettingsMenu;
   JMenuItem slowItem, mediumItem, fastItem;
@@ -79,6 +80,9 @@ public class GameGui extends JFrame implements ActionListener {
     xVsOMenuItem = new JMenuItem("X Vs. O");
     imagesMenu.add(androidVsAppleMenuItem);
     imagesMenu.add(xVsOMenuItem);
+
+    chooseImageItem = new JMenuItem("Choose Custom Images");
+    imagesMenu.add(chooseImageItem);
 
     modeMenu = new JMenu("Change Mode");
     settingsMenu.add(modeMenu);
