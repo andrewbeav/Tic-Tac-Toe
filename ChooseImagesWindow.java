@@ -85,15 +85,24 @@ public class ChooseImagesWindow extends JFrame implements ActionListener {
 
       player2PathField.setText(player2IconPath);
     } else if (source == submitButton) {
-      player1Icon = new ImageIcon(player1IconPath);
-      player2Icon = new ImageIcon(player2IconPath);
+      player1IconPath = player1PathField.getText();
+      player2IconPath = player2PathField.getText();
 
-      this.setVisible(false);
+      if ((player1IconPath.contains(".png") || player1IconPath.contains(".jpg")) &&
+          (player2IconPath.contains(".png") || player2IconPath.contains(".jpg"))) {
+            player1Icon = new ImageIcon(player1IconPath);
+            player2Icon = new ImageIcon(player2IconPath);
 
-      GameGui gui = new GameGui(3);
-      gui.setVisible(true);
-      gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      gui.setImages(player1Icon, player2Icon);
+            this.setVisible(false);
+
+            GameGui gui = new GameGui(3);
+            gui.setVisible(true);
+            gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            gui.setImages(player1Icon, player2Icon);
+      }
+      else {
+        System.out.println("Not an Image!");
+      }
     }
   }
 
